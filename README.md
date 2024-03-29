@@ -1,6 +1,4 @@
-[8:06 PM] ΦΡΑΓΚΟΥΔΑΚΗΣ ΧΡΙΣΤΟΔΟΥΛΟΣ;FRAGKOUDAKIS CHRISTODOULOS
-
-# Εισαγωγή στο Angular Framework
+# Εισαγωγή στο Angular framework
 
 ## Βήμα 0: Προετοιμασία και βασικές ενέργειες
 
