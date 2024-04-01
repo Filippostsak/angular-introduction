@@ -2,16 +2,21 @@ import { Component } from '@angular/core';
 import { PersonTableComponent } from './components/person-table/person-table.component';
 import { Person } from './shared/interfaces/person';
 import { EventBindExampleComponent } from './components/event-bind-example/event-bind-example.component';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
-  imports: [PersonTableComponent, EventBindExampleComponent],
+  imports: [
+    PersonTableComponent,
+    EventBindExampleComponent,
+    RouterLink,
+    RouterOutlet,
+  ],
 })
 export class AppComponent {
-  name = 'Tsakiris Filippos';
   person0 = {
     givenName: 'Filippos',
     surName: 'Tsakiris',
