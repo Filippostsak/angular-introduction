@@ -1,23 +1,35 @@
-import { Component } from '@angular/core';
-import { EPerson } from '../../shared/interfaces/person';
+import { Component, Inject } from '@angular/core';
+import { EPerson, ManyPerson } from '../../shared/interfaces/person';
 import { SimpleDatatableComponent } from '../simple-datatable/simple-datatable.component';
+import {
+  Dialog,
+  DialogRef,
+  DIALOG_DATA,
+  DialogModule,
+} from '@angular/cdk/dialog';
+import { PersonTableComponent } from '../person-table/person-table.component';
 
 @Component({
   selector: 'app-component-output-example',
   standalone: true,
-  imports: [SimpleDatatableComponent],
+  imports: [DialogModule, SimpleDatatableComponent],
   templateUrl: './component-output-example.component.html',
-  styleUrls: ['./component-output-example.component.css'],
+  styleUrl: './component-output-example.component.css',
 })
 export class ComponentOutputExampleComponent {
-  manyPerson: EPerson[] = [];
-  selectedPerson: EPerson | null = null;
+  manyPerson = ManyPerson;
 
-  onPersonClicked(person: EPerson): void {
-    this.selectedPerson = person;
+  constructor(public dialog: Dialog) {}
+
+  onPersonClicked(person: EPerson) {
+    // console.log(person);
+    // alert(this.personTemplate(person));
+    this.dialog.open(PersonDialogComponent, {
+      data: person,
+    });
   }
 
-  personTemplate(person: EPerson): string {
+  personTemplate(person: EPerson) {
     return `
     Person Details:
 
@@ -28,4 +40,32 @@ export class ComponentOutputExampleComponent {
     Education: ${person.education}
     `;
   }
+}
+
+@Component({
+  imports: [PersonTableComponent],
+  standalone: true,
+  template: `
+    <app-person-table [person]="person"></app-person-table>
+    <button class="btn btn-primary btn-sm" (click)="dialogRef.close()">
+      Close
+    </button>
+  `,
+  styles: [
+    `
+      :host {
+        display: block;
+        background: #fff;
+        border-radius: 8px;
+        padding: 16px;
+        max-width: 500px;
+      }
+    `,
+  ],
+})
+class PersonDialogComponent {
+  constructor(
+    public dialogRef: DialogRef,
+    @Inject(DIALOG_DATA) public person: EPerson,
+  ) {}
 }
