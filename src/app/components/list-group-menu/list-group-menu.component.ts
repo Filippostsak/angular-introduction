@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { MenuItem } from '../../shared/interfaces/menu-item';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { MenuItem } from '../../shared/interfaces/menu-item';
 
 @Component({
   selector: 'app-list-group-menu',
@@ -12,11 +12,15 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 export class ListGroupMenuComponent {
   menu: MenuItem[] = [
     { text: 'Component Input Example', routerLink: 'component-input-example' },
-    { text: 'for Directive Example', routerLink: 'for-directive-example' },
+    { text: '@for Directive Example', routerLink: 'for-directive-example' },
     { text: 'Event Bind Example', routerLink: 'event-bind-example' },
     {
       text: 'Simple Datatable Example',
       routerLink: 'simple-datatable-example',
+    },
+    {
+      text: 'Component Output Example',
+      routerLink: 'component-output-example',
     },
   ];
 }

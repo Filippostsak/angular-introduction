@@ -8,8 +8,8 @@ import { ListGroupMenuComponent } from './components/list-group-menu/list-group-
 @Component({
   selector: 'app-root',
   standalone: true,
+  imports: [RouterLink, RouterOutlet, ListGroupMenuComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
-  imports: [RouterLink, RouterOutlet, ListGroupMenuComponent],
 })
 export class AppComponent {}

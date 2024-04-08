@@ -1,17 +1,17 @@
-import { Component, Input, ChangeDetectorRef } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { EPerson } from '../../shared/interfaces/person';
 import { sortBy } from 'lodash-es';
 
 @Component({
-  selector: 'app-simple-data-table',
+  selector: 'app-simple-datatable',
   standalone: true,
-  imports: [CommonModule], // Make CommonModule available
-  templateUrl: './simple-data-table.component.html',
-  styleUrls: ['./simple-data-table.component.css'],
+  imports: [],
+  templateUrl: './simple-datatable.component.html',
+  styleUrl: './simple-datatable.component.css',
 })
-export class SimpleDataTableComponent {
-  @Input() data: EPerson[] = [];
+export class SimpleDatatableComponent {
+  @Input() data: EPerson[];
+  @Output() personClicked = new EventEmitter<EPerson>();
 
   sortOrder = {
     givenName: 'none',
@@ -24,11 +24,12 @@ export class SimpleDataTableComponent {
   sortData(sortKey: string) {
     if (this.sortOrder[sortKey] === 'asc') {
       this.sortOrder[sortKey] = 'desc';
-      this.data = sortBy(this.data, sortBy).reverse();
+      this.data = sortBy(this.data, sortKey).reverse();
     } else {
       this.sortOrder[sortKey] = 'asc';
       this.data = sortBy(this.data, sortKey);
     }
+
     for (let key in this.sortOrder) {
       if (key !== sortKey) {
         this.sortOrder[key] = 'none';
@@ -46,9 +47,7 @@ export class SimpleDataTableComponent {
     }
   }
 
-  constructor(private cdr: ChangeDetectorRef) {}
-
-  ngOnChanges() {
-    this.cdr.detectChanges();
+  onPersonClicked(person: EPerson) {
+    this.personClicked.emit(person);
   }
 }
