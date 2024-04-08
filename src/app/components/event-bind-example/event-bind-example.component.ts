@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './event-bind-example.component.html',
-  styleUrl: './event-bind-example.component.css',
+  styleUrls: ['./event-bind-example.component.css'],
 })
 export class EventBindExampleComponent {
   times: number = 0;

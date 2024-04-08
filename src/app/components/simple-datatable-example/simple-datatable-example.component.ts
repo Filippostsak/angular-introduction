@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
+import { SimpleDatatableComponent } from '../simple-datatable/simple-datatable.component';
 import { ManyPerson } from '../../shared/interfaces/person';
-import { SimpleDataTableComponent } from '../simple-data-table/simple-data-table.component';
 
 @Component({
   selector: 'app-simple-datatable-example',
   standalone: true,
+  imports: [SimpleDatatableComponent],
   templateUrl: './simple-datatable-example.component.html',
   styleUrl: './simple-datatable-example.component.css',
-  imports: [SimpleDataTableComponent],
 })
 export class SimpleDatatableExampleComponent {
-  manyperson = [...ManyPerson];
+  manyperson = ManyPerson;
 }
