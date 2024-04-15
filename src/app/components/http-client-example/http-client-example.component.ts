@@ -1,19 +1,47 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { JokesService } from '../../shared/services/jokes.service';
+import { chuckNorrisJoke, dadJoke } from '../../shared/interfaces/jokes';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-http-client-example',
   standalone: true,
-  imports: [],
+  imports: [MatCardModule, MatButtonModule, HttpClientModule],
   templateUrl: './http-client-example.component.html',
-  styleUrl: './http-client-example.component.css',
+  styleUrls: ['./http-client-example.component.css'],
 })
 export class HttpClientExampleComponent implements OnInit {
-  jokesService = inject(JokesService);
-  dadJoke: string = '';
-  chuckNorrisJoke: string = '';
+  dadJoke: string;
+  chuckNorrisJoke: string;
 
-  ngOninit() {
-    this.jokesService.getDadJoke().subscribe;
+  constructor(private jokesService: JokesService) {}
+
+  ngOnInit(): void {
+    // this.jokesService.getDadJoke().subscribe((data: dadJoke) => {
+    //   console.log(data.joke);
+    //   this.dadJoke = data.joke;
+    // });
+    this.refreshDadJoke();
+
+    this.jokesService
+      .getChuckNorrisJoke()
+      .subscribe((data: chuckNorrisJoke) => {
+        console.log(data.value);
+        this.chuckNorrisJoke = data.value;
+      });
+  }
+  refreshDadJoke() {
+    this.jokesService.getDadJoke().subscribe((data: dadJoke) => {
+      this.dadJoke = data.joke;
+    });
+  }
+  refreshChuckNorrisJoke() {
+    this.jokesService
+      .getChuckNorrisJoke()
+      .subscribe((data: chuckNorrisJoke) => {
+        this.chuckNorrisJoke = data.value;
+      });
   }
 }
