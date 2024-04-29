@@ -39,5 +39,9 @@ export class ListGroupMenuComponent {
       text: 'User Registration',
       routerLink: 'user-registration',
     },
+    {
+      text: 'Restricted Content Example',
+      routerLink: 'restricted-content-example',
+    },
   ];
 }

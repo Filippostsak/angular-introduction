@@ -1,0 +1,35 @@
+<h4>user Login</h4>
+
+<form
+  [formGroup]="form"
+  (ngSubmit)="onSubmit()"
+  class="d-flex flex-column gap-3 w-50"
+>
+  <div class="form-group">
+    <label for="email">Email:</label>
+    <input
+      type="email"
+      class="form-control"
+      id="email"
+      formControlName="email"
+    />
+    <label for="password">Password:</label>
+    <input
+      type="password"
+      class="form-control"
+      id="password"
+      formControlName="password"
+    />
+  </div>
+  <button
+    type="submit"
+    class="btn btn-primary"
+    [disabled]="form.invalid"
+  ></button>
+  @if (invalidLogin) {
+    <div class="alert alert-danger">
+      <strong>Error:</strong>
+      Invalid email or password
+    </div>
+  }
+</form>
